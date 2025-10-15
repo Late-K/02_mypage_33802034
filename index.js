@@ -1,16 +1,19 @@
 //MyPage web app
+const express = require("express");
 
-var http = require("http");
+const app = express();
 const port = 8000;
 
-http
-  .createServer(function (req, res) {
-    console.log(req);
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(
-      "<!DOCTYPE html><html><head><title>My Page</title></head><body><h1>Hello World!</h1><p>This is my page.</p></body></html>"
-    );
-  })
-  .listen(port, function () {
-    console.log("Node server is running on https://localhost:" + port);
-  });
+app.use(express.static(__dirname + "/public"));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.get("/other", (req, res) => {
+  res.sendFile(__dirname + "/other.html");
+});
+
+app.listen(port, () =>
+  console.log(`Node server is running on http://localhost:${port}/`)
+);
