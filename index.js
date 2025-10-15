@@ -1,4 +1,3 @@
-//MyPage web app
 const express = require("express");
 
 const app = express();
